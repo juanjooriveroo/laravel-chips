@@ -1,6 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Controlador;
+use App\Http\Controllers\MemeController;
 
-Route::get('/', [Controlador::class, 'index']);
+Route::get('/', [MemeController::class, 'index']);
