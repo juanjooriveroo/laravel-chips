@@ -14,6 +14,6 @@ class MemeController extends Controller
             ->take(50)
             ->get();
 
-        return view('memes', ['memes' => $memes]);
+        return view('feed', ['memes' => $memes]);
     }
 }

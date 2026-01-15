@@ -9,7 +9,7 @@
 <body class="bg-gray-100">
     <header class="bg-blue-600 text-white p-4">
         <div class="max-w-4xl mx-auto">
-            <h1 class="text-2xl font-bold">{{ $title ?? 'Memes App' }}</h1>
+            <h1 class="text-2xl font-bold">{{ $title ?? '8M-Chirper' }}</h1>
         </div>
     </header>
 
