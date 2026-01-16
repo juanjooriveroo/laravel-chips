@@ -6,6 +6,37 @@
     <div class="max-w-4xl mx-auto px-4">
         <h1 class="text-3xl font-bold mt-8">Últimos Memes</h1>
 
+        <!-- Formulario simple para subir meme -->
+        <div class="card bg-white shadow mt-6 w-full max-w-2xl">
+            <div class="card-body p-4">
+                <form method="POST" action="/memes">
+                    @csrf
+
+                    <div class="mb-3">
+                        <label class="block text-sm font-medium text-gray-700">URL del meme</label>
+                        <input type="url" name="meme_url" value="{{ old('meme_url') }}" required maxlength="255"
+                            class="mt-1 block w-full rounded border-gray-300 shadow-sm">
+                        @error('meme_url')
+                            <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="block text-sm font-medium text-gray-700">Explicación</label>
+                        <textarea name="explicacion" rows="3" required maxlength="255"
+                            class="mt-1 block w-full rounded border-gray-300 shadow-sm">{{ old('explicacion') }}</textarea>
+                        @error('explicacion')
+                            <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div class="text-right">
+                        <button type="submit" class="inline-flex items-center px-3 py-1.5 bg-blue-600 text-white rounded">Subir</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <div class="space-y-8 mt-8 flex flex-col items-center">
             @forelse ($memes as $meme)
                 <x-meme :meme="$meme" />
