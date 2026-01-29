@@ -27,16 +27,15 @@ class MemeController extends Controller
             'explicacion.max' => 'La explicación debe tener 255 caracteres o menos.',
         ]);
 
-        $user = User::first() ?: User::factory()->create([
-            'name' => 'Usuario Anónimo',
-            'email' => 'anon' . time() . '@example.com',
-        ]);
+        // Use authenticated user to create the meme
+        if (! auth()->check()) {
+            return redirect('/login');
+        }
 
-        Meme::create([
+        auth()->user()->memes()->create([
             'meme_url' => $validated['meme_url'],
             'explicacion' => $validated['explicacion'],
             'fecha_subida' => now(),
-            'user_id' => $user->id,
         ]);
 
         return redirect('/')->with('success', '¡Meme subido!');
@@ -44,7 +43,8 @@ class MemeController extends Controller
 
     public function edit(Meme $meme)
     {
-        // Minimal stub for existing routes
+        $this->authorize('update', $meme);
+
         return view('memes.edit', compact('meme'));
     }
 
@@ -55,6 +55,8 @@ class MemeController extends Controller
             'explicacion' => 'required|string|max:255',
         ]);
 
+        $this->authorize('update', $meme);
+
         $meme->update($validated);
 
         return redirect('/')->with('success', 'Meme actualizado.');
@@ -62,6 +64,8 @@ class MemeController extends Controller
 
     public function destroy(Meme $meme)
     {
+        $this->authorize('delete', $meme);
+
         $meme->delete();
 
         return redirect('/')->with('success', 'Meme eliminado.');

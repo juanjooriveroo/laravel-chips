@@ -8,8 +8,20 @@
 </head>
 <body class="bg-gray-100">
     <header class="bg-blue-600 text-white p-4">
-        <div class="max-w-4xl mx-auto">
+        <div class="max-w-4xl mx-auto flex items-center justify-between">
             <h1 class="text-2xl font-bold">{{ $title ?? '8M-Chirper' }}</h1>
+            <div class="flex items-center gap-3">
+                @auth
+                    <span class="text-sm">{{ auth()->user()->name }}</span>
+                    <form method="POST" action="{{ route('logout') }}" class="inline">
+                        @csrf
+                        <button type="submit" class="btn btn-ghost btn-sm">Logout</button>
+                    </form>
+                @else
+                    <a href="{{ route('login') }}" class="btn btn-ghost btn-sm">Sign In</a>
+                    <a href="{{ route('register') }}" class="btn btn-primary btn-sm">Sign Up</a>
+                @endauth
+            </div>
         </div>
     </header>
 

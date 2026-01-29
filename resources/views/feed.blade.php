@@ -6,8 +6,8 @@
     <div class="max-w-4xl mx-auto px-4">
         <h1 class="text-3xl font-bold mt-8">Últimos Memes</h1>
 
-        <!-- Formulario simple para subir meme -->
-        <div class="card bg-white shadow mt-6 w-full max-w-2xl">
+        <!-- Formulario simple para subir meme (ancho igual a los memes) -->
+        <div class="card bg-white shadow mt-6 w-full max-w-xl mx-auto">
             <div class="card-body p-4">
                 <form method="POST" action="/memes">
                     @csrf
